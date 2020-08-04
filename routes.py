@@ -12,8 +12,8 @@ from flask import request, jsonify, Response, render_template
 import numpy as np
 
 import os
-import logging
-from flask_cors import CORS, cross_origin
+# import logging
+# from flask_cors import CORS, cross_origin
 
 
 @routes.route("/")
@@ -36,4 +36,4 @@ if __name__ == "__main__":
     routes.secret_key = os.urandom(24)
     routes.run(host="0.0.0.0", use_reloader=False)
 
-flask_cors.CORS(routes, expose_headers='Authorization')
+# flask_cors.CORS(routes, expose_headers='Authorization')
