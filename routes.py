@@ -25,36 +25,7 @@ def index():
 def upload_file():
     if request.method == 'POST':
 
-        global styles
-        rows = request.form['rows']
-        cols = request.form['cols']
-        arr = request.form['arr']
-        print(arr[0])
-        selected_styles = []
-        for x in arr:
-            if x == ',':
-                continue
-            selected_styles.append(styles[x])
-
-        global counter
-        image_num = str(counter)
-
-        file = request.form['image']
-
-        imgdata = base64.b64decode(file)
-        filename = './../IncomingImage' + image_num + '.jpg'
-
-        with open(filename, 'wb') as f:
-            f.write(imgdata)
-
-        # output_img = get_styled_image(filename + '.jpg', selected_styles, num_rows=2, num_cols=1)
-        # output_img = get_styled_image(filename, selected_styles, num_rows=2, num_cols=1)
-        output_img = get_styled_image(filename, selected_styles, num_rows=int(rows), num_cols=int(cols))
-        output_img.rotate(270)
-        output_img.save('./../returnImage' + image_num + '.jpg')
-        counter = counter + 1
-
-        return "done"
+        return "This is a POST"
 
     else:
         return "This is a GET bro"
