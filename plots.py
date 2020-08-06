@@ -856,44 +856,12 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
         # For debugging
         # print(opt_type)
 
-        # Set colors and create title string portions
-        if opt_type == 'calls':
-            itm_color = 'green'
-            otm_color = 'blue'
-
-            if moneyness == 'itm':
-                main_title.append('\nITM calls={}'.format(itm_color))
-
-            elif moneyness == 'otm':
-                main_title.append('\nOTM calls={}'.format(otm_color))
-
-            elif moneyness == 'both':
-                main_title.append(
-                    '\nITM calls={}, OTM calls={}'.format(itm_color, otm_color))
-
-        else:
-            itm_color = 'red'
-            otm_color = 'purple'
-
-            if moneyness == 'itm':
-                main_title.append('\nITM puts={}'.format(itm_color))
-
-            elif moneyness == 'otm':
-                main_title.append('\nOTM puts={}'.format(otm_color))
-
-            elif moneyness == 'both':
-                main_title.append(
-                    '\nITM puts={}, OTM puts={}'.format(itm_color, otm_color))
-
         # Get all the expirations of the current type
         option_chains = options[opt_type]
 
         # Get the names of the chains in the current type
         single_chains = list(option_chains.keys())
-        #         print(single_chains)
-        # Counter for the y-axis (dates)
-        # Dates are initially plotted as integers
-        # After the whole plot is done, map the date labels to the integers
+
         j = 1
 
         # Loop through expirations
