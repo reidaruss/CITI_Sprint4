@@ -1235,7 +1235,7 @@ def multi_plot_input(symbol):
 
 
 def run_plots(symbol):
-    ticker, params, price_type, opt_type, moneyness, current_date, current_time, r = multi_plot_input()
+    ticker, params, price_type, opt_type, moneyness, current_date, current_time, r = multi_plot_input(symbol)
     options = get_options(current_date, current_time,
                           ticker, opt_type, price_type, r)
 
