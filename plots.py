@@ -1056,11 +1056,7 @@ def date_time_input():
 
     Note: this is done better in single_option_input() for the expiration but I don't feel like refactoring right now
     '''
-    # Print description of the date and time to be input
-    print('\n"Time" refers to the time to use for the time to expiration calculation.')
-    print('Example: if it is currently the weekend, and you want to see the metrics')
-    print('based on EOD Friday (which is what the prices will be from), enter "1",')
-    print('and enter the date of the most recent Friday, with 16:00 as the time (4pm).\n')
+
 
     # Get date
     which_datetime_string = 'Enter 0 to use current date/time, 1 to specify date/time: '
@@ -1068,9 +1064,6 @@ def date_time_input():
 
     datetime_options = ['0', '1']
 
-    # If incorrect input is supplied, loop until the input is correct
-    while which_datetime not in datetime_options:
-        which_datetime = input(which_datetime_string)
 
     # If the current date/time is to be used, get the current date/time
     if which_datetime == '0':
