@@ -19,14 +19,14 @@ from dropbox.files import WriteMode
 from dropbox.exceptions import ApiError, AuthError
 
 # Access token
-TOKEN = 'Qkf0FLmndWAAAAAAAAAAAZPgkamxolW8beT5H91wYfO8SrskCf7uIB1vOCA5H3Kn'
+TOKEN = 'ByMSNXAKFyAAAAAAAAAAAehjAplXmiJx4Rs4gjjuwcej3cOG_uPJEURQyISNrslK'
 
 LOCALFILE = './ndex.html'
-BACKUPPATH = '/citi_options' # Keep the forward slash before destination filename
+BACKUPPATH = '/options.html' # Keep the forward slash before destination filename
 
 
 # Uploads contents of LOCALFILE to Dropbox
-def backup():
+def backup(dbx):
     with open(LOCALFILE, 'rb') as f:
         # We use WriteMode=overwrite to make sure that the settings in the file
         # are changed on upload
@@ -72,13 +72,10 @@ def run_drop():
         sys.exit(
             "ERROR: Invalid access token; try re-generating an access token from the app console on the web.")
 
-    try:
-        checkFileDetails()
-    except Error as err:
-        sys.exit("Error while checking file details")
 
     print("Creating backup...")
     # Create a backup of the current settings file
-    backup()
+    backup(dbx)
 
     print("Done!")
+
