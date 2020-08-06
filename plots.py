@@ -826,15 +826,6 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
         titles[params.index('V')] = price_type.capitalize() + ' Price'
         titles[params.index('openInterest')] = 'Open Interest'
 
-    #     fig = make_subplots(rows =8,cols=1,
-    #                        specs=[[{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}]], subplot_titles=titles)
     fig = make_subplots(rows=2, cols=4,
                         specs=[[{'type': 'Scatter3d'}, {'type': 'Scatter3d'}, {'type': 'Scatter3d'},
                                 {'type': 'Scatter3d'}],
@@ -978,22 +969,15 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
                 #                 fig.show()
 
                 #                 ###########
-
                 if moneyness == 'both':
-                    #                     eval("ax{}.plot(x_itm, y_itm, z_itm, '{}')".format(
-                    #                         i, itm_color))
-                    #                     eval("ax{}.plot(x_otm, y_otm, z_otm, '{}')".format(
-                    #                         i, otm_color))
-                    #                     print(x_itm)
-                    #                     print(y_itm)
-                    #                     print(z_itm)
                     if i < 5:
                         temp_i = 1
                         temp_k = i
                     elif i >= 5:
                         temp_i = 2
                         temp_k = i - 4
-
+                    #                     y_itm = [exps[y_itm[0]-1] for el in y_itm]
+                    #                     y_otm = y_itm
                     eval("fig.add_trace(go.Scatter3d(x={},y={},z={},mode='lines'),row={},col={})".format(x_itm, y_itm,
                                                                                                          z_itm, temp_i,
                                                                                                          temp_k))
@@ -1002,6 +986,7 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
                                                                                                          temp_k))
                     eval("fig.update_layout(height=700, showlegend=False)")
                     eval("fig.update_xaxes(tickprefix='$')")
+                    # print(exps[y_itm[0]-1])
                 # Increment the axis (parameter) counter
                 i += 1
 
@@ -1025,7 +1010,6 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
     else:
         ticks = [x for x in range(1, j, 2)]
         exps = [exps[x] for x in ticks]
-
     # Create a list of the index of the subplots
     axs = [x for x in range(1, i)]
 
@@ -1050,16 +1034,15 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
 
     #     # Show the plot
     #     plt.show(block=True)
-    eval("fig.update_yaxes(ticktext=exps,tickvals=ticks)")
-    print(exps)
-    print(ticks)
+    #     print(len(y_ticks))
+    #     eval("fig[0].layout(yaxis=dict(tickmode = 'array',ticktext={},tickvals={}))".format(y_ticks,ticks))
 
     fig.update_layout(
-        title_text='3D subplots with different colorscales',
+        title_text='Options Data for Ticker',
         height=1000,
         width=2000)
     pio.write_html(fig, file='ndex.html', auto_open=False)
-    #fig.show()
+    fig.show()
     #     return ticks, exps, df, ret_list
 
     pass
