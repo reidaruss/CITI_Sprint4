@@ -9,6 +9,7 @@ import math as m
 from scipy.stats import norm
 import yfinance as yf
 import chart_studio
+from file_upload import run_drop
 
 class Option:
     '''
@@ -1236,7 +1237,7 @@ def run_plots(symbol):
 
     exps = generate_plots(ticker, options, moneyness, params, price_type,
                    current_date, current_time)
-
+    run_drop()
     return exps
 
 
