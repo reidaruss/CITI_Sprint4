@@ -78,9 +78,4 @@ def homepage():
 
     return Response(content, "text/html")
 
-# @app.route('/<path:path>')
-# def send_js(path):
-#     return send_from_directory('./', path)
-
-# start the server with the 'run()' method
 app.run(debug = True, use_reloader=False)
