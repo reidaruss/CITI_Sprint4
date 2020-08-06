@@ -5,6 +5,9 @@ from flask import request, session
 from flask import jsonify
 from plots import run_plots
 # from flask_cors import CORS, cross_origin
+
+import chart_studio.tools as tls
+
 routes = Flask(__name__)
 
 from flask import request, jsonify, Response, render_template
@@ -31,7 +34,8 @@ def upload_file():
     else:
         tick = request.args.get('ticker')
         exps = run_plots(tick)
-        return jsonify(exps)
+        embeded = tls.get.get_embed('https://www.dropbox.com/s/yszoi5k6cguuc4o/options.html?dl=0')
+        return jsonify(exps), jsonify(embeded)
 
 
 if __name__ == "__main__":
