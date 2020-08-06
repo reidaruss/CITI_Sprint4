@@ -1042,9 +1042,9 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
         height=1000,
         width=2000)
     pio.write_html(fig, file='ndex.html', auto_open=False)
-    fig.show()
+    #fig.show()
     #     return ticks, exps, df, ret_list
-
+    return exps
     pass
 
 def date_time_input():
@@ -1064,7 +1064,7 @@ def date_time_input():
 
     # Get date
     which_datetime_string = 'Enter 0 to use current date/time, 1 to specify date/time: '
-    which_datetime = input(which_datetime_string)
+    which_datetime = 0
 
     datetime_options = ['0', '1']
 
@@ -1130,7 +1130,7 @@ def date_time_input():
 
     return current_date, current_time
 
-def multi_plot_input():
+def multi_plot_input(symbol):
     '''
     User input for:
         - ticker
@@ -1144,7 +1144,8 @@ def multi_plot_input():
     '''
     # Get ticker
     ticker_string = '\nEnter ticker symbol: '
-    ticker = input(ticker_string).upper()
+    # ticker = input(ticker_string).upper()
+    ticker = symbol
 
     try:
         # Try getting the first options expiration of the ticker
@@ -1233,14 +1234,15 @@ def multi_plot_input():
     return ticker, params, price_type, opt_type, moneyness, current_date, current_time, r
 
 
-def main():
+def run_plots(symbol):
     ticker, params, price_type, opt_type, moneyness, current_date, current_time, r = multi_plot_input()
     options = get_options(current_date, current_time,
                           ticker, opt_type, price_type, r)
 
-    generate_plots(ticker, options, moneyness, params, price_type,
+    exps = generate_plots(ticker, options, moneyness, params, price_type,
                    current_date, current_time)
 
+    return exps
 
-main()
+
 

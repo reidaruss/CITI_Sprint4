@@ -2,7 +2,7 @@
 from flask import Flask
 from flask import send_file
 from flask import request, session
-
+from plots import run_plots
 # from flask_cors import CORS, cross_origin
 routes = Flask(__name__)
 
@@ -28,7 +28,9 @@ def upload_file():
         return "This is a POST"
 
     else:
-        return "This is a GET bro"
+        tick = request.args.get('ticker')
+        exps = run_plots(tick)
+        return exps
 
 
 if __name__ == "__main__":
