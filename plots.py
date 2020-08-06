@@ -1063,7 +1063,9 @@ def date_time_input():
     which_datetime = 0
 
     datetime_options = ['0', '1']
-
+    now = dt.datetime.now()
+    current_date = str(now.date())
+    current_time = '{}:{}'.format(now.time().hour, now.time().minute)
 
     # If the current date/time is to be used, get the current date/time
     if which_datetime == '0':
