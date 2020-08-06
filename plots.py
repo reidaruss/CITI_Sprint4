@@ -893,17 +893,6 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
                 # set up a subplot for each parameter
                 if first_iter == True:
                     pass
-                    # For debugging
-                    # print('Create axis {}:{} {} {}'.format(
-                    #     i, exp, opt_type[0:-1], param))
-                #                     exec("ax{} = fig.add_subplot({}{}{}, projection='3d')".format(i,
-                #                                                                                   rows,
-                #                                                                                   cols,
-                #                                                                                   i))
-                #                     exec("fig.add_trace(go.Surface(x={},y={},z{}))".format(rows,cols,i))
-                #                     eval("ax{}.set_title(titles[{}])".format(i, i - 1))
-                #                     eval("ax{}.set_xlabel('strike')".format(i))
-                #                     eval("ax{}.view_init(45, -65)".format(i))
 
                 else:
                     # For debugging
@@ -929,15 +918,6 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
                         y_otm.append(j)
                         eval('z_otm.append(option.{})'.format(param))
 
-                        #########
-                #                 fig = go.Figure(data=[go.Surface(z=SPY.values)])
-                #                 fig.update_layout(title='S&P 500', autosize=False,
-                #                     width=500, height=500,
-                #                     margin=dict(l=65, r=50, b=65, t=90))
-
-                #                 fig.show()
-
-                #                 ###########
                 if moneyness == 'both':
                     if i < 5:
                         temp_i = 1
@@ -953,8 +933,7 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
                     eval("fig.add_trace(go.Scatter3d(x={},y={},z={},mode='lines'),row={},col={})".format(x_otm, y_otm,
                                                                                                          z_otm, temp_i,
                                                                                                          temp_k))
-                    eval("fig.update_layout(height=700, showlegend=False)")
-                    eval("fig.update_xaxes(tickprefix='$')")
+
                     # print(exps[y_itm[0]-1])
                 # Increment the axis (parameter) counter
                 i += 1
