@@ -62,10 +62,6 @@ body {
 html_code = html_code.replace("<!-- ARTICLES HERE -->", tabulate(article_list, tablefmt='html'))
 
 
-# f.write(html_code + recipes)
-# f.close()
-
-
 # ##############################################################
 # CREATING THE WEBSITE
 
