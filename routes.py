@@ -34,7 +34,7 @@ def upload_file():
     else:
         tick = request.args.get('ticker')
         exps = run_plots(tick)
-        embeded = tls.get.get_embed('https://www.dropbox.com/s/yszoi5k6cguuc4o/options.html?dl=0')
+        embeded = tls.get_embed('https://www.dropbox.com/s/yszoi5k6cguuc4o/options.html?dl=0')
         return jsonify(exps), jsonify(embeded)
 
 
