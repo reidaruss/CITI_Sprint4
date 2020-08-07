@@ -1,35 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<head>
-    <meta charset="UTF-8">
-    <title>Citi Sprint 4</title>
-</head>
-<body>
-<h1 class="my-5 text-center font-weight-bold">Citi Sprint 4</h1>
-<div class="div-fields col-6 m-auto d-flex">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <button class="req-buttons w-50 mr-2">
-Get
-    </button>
-    <button class="req-buttons w-50 ml-2 ">
-Post
-    </button>
-</div>
+    <head>
+        <meta charset="UTF-8">
+        <title>Citi Sprint 4</title>
+    </head>
+    <body class="page-width my-5">
+        <h1 class="  text-dark text-center font-weight-bold">Citi Sprint 4</h1>
+        <div class=" my-5 py-5">
+            <div class="text-center pb-4">
+            <p> Please enter a ticker for the stock you want to see</p>
+                <form method="Post">
+                    <p><input id="stock-name" type = "text" class="col-3 m-auto"/></p>
+                </form>
+            </div>
+            <div class="div-fields col-3 w-100 text-center m-auto ">
+                <a  id="get-button"  onclick="get_href()"class="shadow text-center light-blue  req-buttons mr-2 w-100 px-5 py-2">
+                Get Info
+                </a>
 
-</body>
+
+            </div>
+        </div>
+        
+        </div>
+
+    </body>
 </html>
 <style>
-    header{
-    margin-top: 30px;
-    font-size: 45px;
-    text-align: center;
-    }
-    .req-buttons{
-    font-size:25px;
-     text-transformation: uppercase;
-     font-weight:bold;
-     border-radius: 20px;
-    }
+#get-button
+{
+  
+    cursor: pointer;
+}
+.light-blue{
+background-color: #ADD8E6;
+}
+.req-buttons{
+font-size:25px;
+text-transformation: uppercase;
+font-weight:bold;
+border-radius: 20px;
+color: black;
+}
+.page-width {
+    max-width: 1200px;
+    margin: auto;
+}
+a:hover{
+    text-decoration: none;
+}
+
+
 
 </style>
+<script>
+    function get_href(){
+        var input = document.getElementById("stock-name");
+        console.log(input.value);
+        document.getElementById("get-button").href = "/"+ input.value;
+    }
+</script>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="https://www.dropbox.com/s/yszoi5k6cguuc4o/options.html?dl=0" rel="import" />
+<head>
+    <meta charset="UTF-8">
+    <title>Citi Sprint 4</title>
+</head>
+<body>
+    <div class="page-width my-5">
+        <a href="/" class="shadow light-blue text-center req-buttons mr-2  px-5 py-2 mt-5 ">
+            &lt; Back to Search
+        </a>
+        <h1 class="  my-5 text-center font-weight-bold">{{name}}</h1>
+            
+        <div class="mt-4">
+            <div> 
+                <h3>Graphs </h3>
+                <div id="displayed-graph">
+                <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://www.dropbox.com/s/yszoi5k6cguuc4o/options.embed" height="525" width="100%"></iframe>
+                </div>
+            
+
+            </div> 
+            <div class="mt-4">
+                <h3>News for {{name}} </h3>
+                 <div id="news-loop">
+                    {% for each in news %}
+                    {{ each }}
+                    {% endfor %}
+                </div> 
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<style>
+
+.page-width {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.light-blue{
+background-color: #ADD8E6;
+
+}
+
+.req-buttons {
+    font-size: 25px;
+    text-transformation: uppercase;
+    font-weight: bold;
+    border-radius: 20px;
+    color: black;
+    cursor: pointer;
+}
+a:hover{
+    text-decoration: none;
+    color:black;
+}
+</style>
+
+<script>
+</script>
+
+
+
+
