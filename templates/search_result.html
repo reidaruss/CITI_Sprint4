@@ -15,19 +15,21 @@
             
         <div class="mt-4">
             <div> 
-                <h3>Graphs </h3>
+                <h3>Graphs for {{name}} </h3>
                 <div id="displayed-graph">
-                <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://www.dropbox.com/s/yszoi5k6cguuc4o/options.embed" height="525" width="100%"></iframe>
+                <img src=".\image.png"/>
                 </div>
             
 
             </div> 
             <div class="mt-4">
-                <h3>News for {{name}} </h3>
+                <h3 class="pb-3">News for {{name}} </h3>
                  <div id="news-loop">
-                    {% for each in news %}
-                    {{ each }}
-                    {% endfor %}
+                 
+                        {% for each in news %}
+                            {{ each | safe}}
+                        {% endfor %}
+                  
                 </div> 
             </div>
         </div>

@@ -13,7 +13,7 @@ import logging
 import re 
 
 from flask import jsonify
-from plots import run_plots
+
 
 # from flask_cors import CORS, cross_origin
 
@@ -29,25 +29,8 @@ import numpy as np
 import os
 # import logging
 # from flask_cors import CORS, cross_origin
-@routes.route("/")
- def index():		 
-     return render_template("index.html")
-
-@routes.route('/<string:result>', methods=['GET'])
-def get_result(result):
-    news_list = get_news(result)
-    return render_template('search_result.html', name = result, news = news_list)
-
-if __name__ == "__main__":
-    # routes.run(host='0.0.0.0')
- 
-    routes.secret_key = os.urandom(24)
-    routes.run(host="0.0.0.0", use_reloader=False)
 
 
-
-# ##############################################################
-# CREATING THE SEARCH FUNCTION USING API
 def get_news(ticker):
 
 
@@ -66,8 +49,29 @@ def get_news(ticker):
         url = article["url"]
         title = article["title"]
         date = article["publishedAt"]
-        news_html = "<div class='my-3'><a href='" + url + "' ><h4 class='font-weight-bold my-3'>"+ title+ "</h4> </a><p class='mt-1 small'>"+ date + "</p><p class='mt-2 p-2'> " + description +"</p></div>"
+        news_html = "<div class='my-4 border-bottom'><a href='" + url + "' ><h4 class='font-weight-bold my-3'>"+ title+ "</h4> </a><p class='mt-1 small'>"+ date + "</p><p class='p-2'> " + description +"</p></div>"
         article_list.append(news_html)
         
 
     return article_list
+
+
+@routes.route("/")
+def index():		 
+     return render_template("index.html")
+
+@routes.route('/<string:result>', methods=['GET'])
+def get_result(result):
+    news_list = get_news(result)
+    return render_template('search_result.html', name = result, news = news_list)
+
+if __name__ == "__main__":
+    # routes.run(host='0.0.0.0')
+ 
+    routes.secret_key = os.urandom(24)
+    routes.run(host="0.0.0.0", use_reloader=False)
+
+
+
+# ##############################################################
+# CREATING THE SEARCH FUNCTION USING API
