@@ -29,7 +29,9 @@ import numpy as np
 import os
 # import logging
 # from flask_cors import CORS, cross_origin
-
+@routes.route("/")
+ def index():		 
+     return render_template("index.html")
 
 @routes.route('/<string:result>', methods=['GET'])
 def get_result(result):
