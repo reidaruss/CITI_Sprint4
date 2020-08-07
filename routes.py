@@ -29,8 +29,8 @@ def index():
 
 @routes.route('/<string:result>', methods=['GET'])
 def get_result(result):
-    # news_list = get_news(result)
-    return render_template('search_result.html', name = result)
+    news_list = get_news(result)
+    return render_template('search_result.html', name = result, news = news_list)
 
 if __name__ == "__main__":
     # routes.run(host='0.0.0.0')
