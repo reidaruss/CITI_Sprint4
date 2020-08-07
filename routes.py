@@ -2,6 +2,7 @@
 from flask import Flask
 from flask import send_file
 from flask import request, session
+
 # flask_cors.CORS(routes, expose_headers='Authorization')
 import requests
 from tabulate import tabulate
@@ -10,7 +11,14 @@ from tabulate import tabulate
 from flask import Flask, Response, send_from_directory
 import logging
 import re 
+
+from flask import jsonify
+from plots import run_plots
+
 # from flask_cors import CORS, cross_origin
+
+
+
 routes = Flask(__name__)
 
 from flask import request, jsonify, render_template
@@ -22,10 +30,6 @@ import os
 # import logging
 # from flask_cors import CORS, cross_origin
 
-#35.226.134.37:5000/upload
-@routes.route("/")
-def index():
-    return render_template("index.html")
 
 @routes.route('/<string:result>', methods=['GET'])
 def get_result(result):

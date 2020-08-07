@@ -9,6 +9,7 @@ import math as m
 from scipy.stats import norm
 import yfinance as yf
 import chart_studio
+from file_upload import run_drop
 
 class Option:
     '''
@@ -826,15 +827,6 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
         titles[params.index('V')] = price_type.capitalize() + ' Price'
         titles[params.index('openInterest')] = 'Open Interest'
 
-    #     fig = make_subplots(rows =8,cols=1,
-    #                        specs=[[{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}],
-    #                               [{'type': 'Scatter3d'}]], subplot_titles=titles)
     fig = make_subplots(rows=2, cols=4,
                         specs=[[{'type': 'Scatter3d'}, {'type': 'Scatter3d'}, {'type': 'Scatter3d'},
                                 {'type': 'Scatter3d'}],
@@ -864,44 +856,12 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
         # For debugging
         # print(opt_type)
 
-        # Set colors and create title string portions
-        if opt_type == 'calls':
-            itm_color = 'green'
-            otm_color = 'blue'
-
-            if moneyness == 'itm':
-                main_title.append('\nITM calls={}'.format(itm_color))
-
-            elif moneyness == 'otm':
-                main_title.append('\nOTM calls={}'.format(otm_color))
-
-            elif moneyness == 'both':
-                main_title.append(
-                    '\nITM calls={}, OTM calls={}'.format(itm_color, otm_color))
-
-        else:
-            itm_color = 'red'
-            otm_color = 'purple'
-
-            if moneyness == 'itm':
-                main_title.append('\nITM puts={}'.format(itm_color))
-
-            elif moneyness == 'otm':
-                main_title.append('\nOTM puts={}'.format(otm_color))
-
-            elif moneyness == 'both':
-                main_title.append(
-                    '\nITM puts={}, OTM puts={}'.format(itm_color, otm_color))
-
         # Get all the expirations of the current type
         option_chains = options[opt_type]
 
         # Get the names of the chains in the current type
         single_chains = list(option_chains.keys())
-        #         print(single_chains)
-        # Counter for the y-axis (dates)
-        # Dates are initially plotted as integers
-        # After the whole plot is done, map the date labels to the integers
+
         j = 1
 
         # Loop through expirations
@@ -933,17 +893,6 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
                 # set up a subplot for each parameter
                 if first_iter == True:
                     pass
-                    # For debugging
-                    # print('Create axis {}:{} {} {}'.format(
-                    #     i, exp, opt_type[0:-1], param))
-                #                     exec("ax{} = fig.add_subplot({}{}{}, projection='3d')".format(i,
-                #                                                                                   rows,
-                #                                                                                   cols,
-                #                                                                                   i))
-                #                     exec("fig.add_trace(go.Surface(x={},y={},z{}))".format(rows,cols,i))
-                #                     eval("ax{}.set_title(titles[{}])".format(i, i - 1))
-                #                     eval("ax{}.set_xlabel('strike')".format(i))
-                #                     eval("ax{}.view_init(45, -65)".format(i))
 
                 else:
                     # For debugging
@@ -969,39 +918,23 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
                         y_otm.append(j)
                         eval('z_otm.append(option.{})'.format(param))
 
-                        #########
-                #                 fig = go.Figure(data=[go.Surface(z=SPY.values)])
-                #                 fig.update_layout(title='S&P 500', autosize=False,
-                #                     width=500, height=500,
-                #                     margin=dict(l=65, r=50, b=65, t=90))
-
-                #                 fig.show()
-
-                #                 ###########
-
                 if moneyness == 'both':
-                    #                     eval("ax{}.plot(x_itm, y_itm, z_itm, '{}')".format(
-                    #                         i, itm_color))
-                    #                     eval("ax{}.plot(x_otm, y_otm, z_otm, '{}')".format(
-                    #                         i, otm_color))
-                    #                     print(x_itm)
-                    #                     print(y_itm)
-                    #                     print(z_itm)
                     if i < 5:
                         temp_i = 1
                         temp_k = i
                     elif i >= 5:
                         temp_i = 2
                         temp_k = i - 4
-
+                    #                     y_itm = [exps[y_itm[0]-1] for el in y_itm]
+                    #                     y_otm = y_itm
                     eval("fig.add_trace(go.Scatter3d(x={},y={},z={},mode='lines'),row={},col={})".format(x_itm, y_itm,
                                                                                                          z_itm, temp_i,
                                                                                                          temp_k))
                     eval("fig.add_trace(go.Scatter3d(x={},y={},z={},mode='lines'),row={},col={})".format(x_otm, y_otm,
                                                                                                          z_otm, temp_i,
                                                                                                          temp_k))
-                    eval("fig.update_layout(height=700, showlegend=False)")
-                    eval("fig.update_xaxes(tickprefix='$')")
+
+                    # print(exps[y_itm[0]-1])
                 # Increment the axis (parameter) counter
                 i += 1
 
@@ -1025,7 +958,6 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
     else:
         ticks = [x for x in range(1, j, 2)]
         exps = [exps[x] for x in ticks]
-
     # Create a list of the index of the subplots
     axs = [x for x in range(1, i)]
 
@@ -1050,18 +982,17 @@ def generate_plots(ticker, options, moneyness, params, price_type, current_date,
 
     #     # Show the plot
     #     plt.show(block=True)
-    eval("fig.update_yaxes(ticktext=exps,tickvals=ticks)")
-    print(exps)
-    print(ticks)
+    #     print(len(y_ticks))
+    #     eval("fig[0].layout(yaxis=dict(tickmode = 'array',ticktext={},tickvals={}))".format(y_ticks,ticks))
 
     fig.update_layout(
-        title_text='3D subplots with different colorscales',
+        title_text='Options Data for Ticker',
         height=1000,
         width=2000)
     pio.write_html(fig, file='ndex.html', auto_open=False)
     #fig.show()
     #     return ticks, exps, df, ret_list
-
+    return exps
     pass
 
 def date_time_input():
@@ -1073,21 +1004,16 @@ def date_time_input():
 
     Note: this is done better in single_option_input() for the expiration but I don't feel like refactoring right now
     '''
-    # Print description of the date and time to be input
-    print('\n"Time" refers to the time to use for the time to expiration calculation.')
-    print('Example: if it is currently the weekend, and you want to see the metrics')
-    print('based on EOD Friday (which is what the prices will be from), enter "1",')
-    print('and enter the date of the most recent Friday, with 16:00 as the time (4pm).\n')
+
 
     # Get date
     which_datetime_string = 'Enter 0 to use current date/time, 1 to specify date/time: '
-    which_datetime = input(which_datetime_string)
+    which_datetime = 0
 
     datetime_options = ['0', '1']
-
-    # If incorrect input is supplied, loop until the input is correct
-    while which_datetime not in datetime_options:
-        which_datetime = input(which_datetime_string)
+    now = dt.datetime.now()
+    current_date = str(now.date())
+    current_time = '{}:{}'.format(now.time().hour, now.time().minute)
 
     # If the current date/time is to be used, get the current date/time
     if which_datetime == '0':
@@ -1147,7 +1073,7 @@ def date_time_input():
 
     return current_date, current_time
 
-def multi_plot_input():
+def multi_plot_input(symbol):
     '''
     User input for:
         - ticker
@@ -1161,7 +1087,8 @@ def multi_plot_input():
     '''
     # Get ticker
     ticker_string = '\nEnter ticker symbol: '
-    ticker = input(ticker_string).upper()
+    # ticker = input(ticker_string).upper()
+    ticker = symbol
 
     try:
         # Try getting the first options expiration of the ticker
@@ -1250,14 +1177,15 @@ def multi_plot_input():
     return ticker, params, price_type, opt_type, moneyness, current_date, current_time, r
 
 
-def main():
-    ticker, params, price_type, opt_type, moneyness, current_date, current_time, r = multi_plot_input()
+def run_plots(symbol):
+    ticker, params, price_type, opt_type, moneyness, current_date, current_time, r = multi_plot_input(symbol)
     options = get_options(current_date, current_time,
                           ticker, opt_type, price_type, r)
 
-    generate_plots(ticker, options, moneyness, params, price_type,
+    exps = generate_plots(ticker, options, moneyness, params, price_type,
                    current_date, current_time)
+    run_drop()
+    return exps
 
 
-main()
 
