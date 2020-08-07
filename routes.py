@@ -49,7 +49,7 @@ def get_news(ticker):
         url = article["url"]
         title = article["title"]
         date = article["publishedAt"]
-        news_html = "<div class='my-4 border-bottom'><a href='" + url + "' ><h4 class='font-weight-bold my-3'>"+ title+ "</h4> </a><p class='mt-1 small'>"+ date + "</p><p class='p-2'> " + description +"</p></div>"
+        news_html = "<div class=' p-4 border-bottom'><a class='news-titles' href='" + url + "' target='_blank'><h4 class='font-weight-bold my-3'>"+ title+ "</h4> </a><p class='mt-1 small'>"+ date + "</p><p class='py-2'> " + description +"</p></div>"
         article_list.append(news_html)
         
 

@@ -7,24 +7,24 @@
     <title>Citi Sprint 4</title>
 </head>
 <body>
-    <div class="page-width my-5">
+    <div class="page-width my-5 mx-3 mw-100">
         <a href="/" class="shadow light-blue text-center req-buttons mr-2  px-5 py-2 mt-5 ">
             &lt; Back to Search
         </a>
-        <h1 class="  my-5 text-center font-weight-bold uppercase">{{name}}</h1>
+        <h1 class="  my-5 text-center font-weight-bold text-uppercase">{{name}}</h1>
             
         <div class="mt-4">
             <div> 
-                <h3>Graphs for {{name}} </h3>
-                <div id="displayed-graph" class="mw-100">
-                   <img class="mw-100" src="./static/graph-1.png"/>
-                   <img class="mw-100 w-100"src="./static/graph-2.png"/>
+                <h3 class="mb-3 light-steelblue text-center font-weight-bold border-top border-bottom border-dark">Graphs for <span class="text-uppercase">{{name}}</span> </h3>
+                <div id="displayed-graph" class="mw-100 text-center">
+                   <img class="mw-100 w-75" src="./static/graph-1.png"/>
+                   <img class="mw-100 w-75"src="./static/graph-2.png"/>
                 </div>
             
 
             </div> 
             <div class="mt-4">
-                <h3 class="pb-3">News for {{name}} </h3>
+                <h3 class="mb-3 light-steelblue text-center font-weight-bold border-top border-bottom border-dark">News for <span class="text-uppercase">{{name}}</span> </h3>
                  <div id="news-loop">
                  
                         {% for each in news %}
@@ -39,7 +39,16 @@
 </body>
 </html>
 <style>
-
+a.news-titles, a.news-titles:visited, a.news-titles:focus{
+ color:black;
+}
+a.news-titles:hover{
+    color: #0056b3;
+    text-decoration: underline;
+}
+.light-steelblue{
+    background-color: lightsteelblue;
+}
 .page-width {
     max-width: 1200px;
     margin: auto;
